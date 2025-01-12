@@ -1,0 +1,34 @@
+First, let us learn C++ basic frame
+  You may find 'system("pause")' useful
+单行注释： //
+多行注释： /**/
+
+
+# include <iostream>
+using namespace std;
+
+int main()
+{
+	cout << "I have a crush on u!" << endl;
+	//system("pause");
+	return 0;
+}
+/*
+	我必须说， 学校教的东西真的是垃圾的一批
+
+*/
+变量： 给一个指定的内存空间起名字， 来让我们以后方便操纵那块内存空间
+常量：
+法1： #define N 100
+法2： const int n = 10;
+只要在程序中试图修改常量， 就会引发报错
+原来起的名字叫做： 标识符
+
+数据类型
+整型
+  short  -32768`32767   int 2147483647     long          long long
+// 补充： 对sizeof关键字做的一些实验
+// 实验发现， 返回结果是字节数
+// 而且 int 和 long 都是4个字节
+float 7位 4字节
+double 15位 8字节
