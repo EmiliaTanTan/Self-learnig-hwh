@@ -32,3 +32,33 @@ int main()
 // 而且 int 和 long 都是4个字节
 float 7位 4字节
 double 15位 8字节
+我们通常认为， 所有的小数都是double型， 双精度
+
+字符型变量存储的不是字符本身， 而是其对应的ascii值
+字体推荐： Consolas
+如果你考试的时候不小心忘掉了ASCII码值， 你可以采取如下操作：
+	char ch = 'a';
+	cout << (int)ch << endl;
+a-97 A-65(务必记住)
+注意， 我们有三个需要记住的转义字符 \n  \t \\ 共三个
+\t 最终会产生 8 个空格的空间
+
+重点： 字符串
+事先声明 C语言的字符串难用的一批！！！ C语言的字符串难用的一批！！！
+	char str1[] = "Hello world!";  
+// 在上面的例子中， 我们并不需要事先声明字符数组的长度
+// 字符用单引号引起， 字符串用双引号引起
+Method2： #include<string>
+string test = "I have a crush on you";
+
+true 和 false 的本质 是 0 和 1 ， 占一个字节
+	bool flag = true;
+	cout << flag << endl;
+上面的代码输出结果是： 1
+
+重点： 字符串的输入
+1. cin >> str; 
+	这么写的弊端在于： 不接受空格
+2. getline(cin , str) # 超级推荐这样来写
+
+
