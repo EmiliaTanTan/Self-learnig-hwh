@@ -1,0 +1,98 @@
+流程控制
+  """
+      其实不管是哪门c语言课， 上来都要讲这些无聊的东西
+"""
+1. if ... else if ...else if ... else... 
+    千万不要在 if 后面加分号， 否则if就白写了
+    也就是说， 我们的程序可以有超多个分支！！
+    if语句的嵌套（感觉就像是树的剪枝和嫁接）
+2. 三目运算符
+  Demo:
+        int a = 10, b = 20, c = 0;
+        c = a > b ? a : b;
+        cout << c << endl;
+  //输出20
+  Demo：
+    (a > b ? a : b) = 100; // 也就是说， 其实返回的直接结果是变量
+  /*
+    最重要的地方在于： 三目运算符的返回结果是一个变量
+*/
+3. switch语句
+  结构会更加清晰
+  Demo:
+      int score;
+      cin >> score;
+      switch (score)
+      {
+      case 10: cout << "优" << endl; break;
+      case 9: cout << "良" << endl; break;
+      case 8: cout << "中" << endl; break;
+      case 7: cout << "差" << endl; break;
+      default : cout << "垃圾" << endl; break;
+      }
+4. while / do ... while ...
+    Demo:
+        int num = 0;
+        do
+        {
+        	cout << num << endl;
+        	num++;
+        } while (num < 10);
+    Output: 
+        0
+        1
+        2
+        3
+        4
+        5
+        6
+        7
+        8
+        9
+# 这里打一个小小的补丁：
+  # include <cmath>
+  cout << pow(2, 3) << endl;
+  // 输出结果是8， 整型！！ 请放心使用cmath库函数！！！
+  Demo：水仙花数
+    # include <iostream>
+    # include <cmath>
+    using namespace std;
+    // 求出三位数中的所有水仙花数， 要求使用do while语句
+    int main()
+    {
+    	int num = 100;
+    	do
+    	{
+    		int a = num / 100; // 百位数
+    		int b = num / 10 % 10; // 十位数
+    		int c = num % 10; // 个位数
+    		if (pow(a, 3) + pow(b, 3) + pow(c, 3) == num)
+    			cout << num << endl;
+    		num++;
+    	} while (num <= 999);
+    	system("pause");
+    	return 0;
+    }
+Output:
+    153
+    370
+    371
+    407
+
+5. for 循环
+    我必须承认 python 的 for 循环远远没有c++强大
+    甚至说， for循环本身就很强大， 如果没有循环， 我们就只能面对讨厌的recursion
+    Demo:
+        for (int i = 1; i <= 100; ++i)
+        {
+        	if (i % 10 == 7 || i / 10 % 10 == 7 || i % 7 == 0)
+        		cout << "敲桌子" << endl;
+        	else
+        		cout << i << endl;
+        }
+
+感觉好无聊啊， 这种培训班讲课可能都这个样子吧
+6. goto, break, continue 
+    好用， 但是很有害
+
+
