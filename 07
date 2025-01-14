@@ -1,0 +1,184 @@
+引用： 给变量起别名
+  引用就是取别名
+  注意事项 1. 引用必须初始化
+          2. 初始化之后， 就不可以改变
+  Demo:
+      #include <iostream>
+      using namespace std;
+      
+      int main()
+      {
+      	int a = 10;
+      	int& b = a;
+      	cout << "a = " << a << endl;
+      	cout << "b = " << b << endl;
+      	b = 100;
+      	cout << "a = " << a << endl;
+      	cout << "b = " << b << endl;
+      	system("pause");
+      	return 0;
+      }
+      // OUTPUT 10 10 100 100
+  DEMO:
+        #include <iostream>
+        using namespace std;
+        
+        int main()
+        {
+        	int a = 10;
+        	int b = 20;
+        	int& c = a; // 引用此后就不会再被更改
+        	c = b; //注意， 这里进行的是：赋值操作，不是更改引用
+        	cout << "a = " << a << endl;
+        	cout << "b = " << b << endl;
+        	cout << "c = " << c << endl;
+        	system("pause");
+        	return 0;
+        }
+      // OUTPUT:
+          a = 20
+          b = 20
+          c = 20
+
+  其实我们平常做题的时候， 最重要的技能就是： 引用作为函数参数， 本质上， 这就是一种对指针的简化
+  说实话， 我觉得还是swap()库函数比较好用！！
+  就算自己写的myswap()可以用引用来简化内部代码， 但依然很难做到多态
+  Polymorphism!!(现在觉得多态真的是一种很重要的技术手段)
+
+  引用可以作为函数的返回值
+  但是， 请注意， 1.不要返回局部变量的引用！！
+  2. 函数的调用可以作为左值
+  Demo:
+      #include <iostream>
+      using namespace std;
+      
+      int& test1()
+      {
+      	int a = 10; 
+      	return a; // 局部变量
+      }
+      
+      int& test2()
+      {
+      	static int a = 20;
+      	return a; // 静态变量
+      }
+      
+      int main()
+      {
+      	int ref1 = test1(); // 这里只是进行了简单的复制， 并没有引用
+      	int& ref2 = test1(); // 引用局部变量？？ 动动脑子都知道会出错！！！
+      	cout << "ref1 = " << ref1 << endl;
+      	cout << "ref1 = " << ref1 << endl;
+      	cout << "ref1 = " << ref1 << endl;
+      	cout << "ref2 = " << ref2 << endl;
+      	cout << "ref2 = " << ref2 << endl;
+      	cout << "ref2 = " << ref2 << endl;
+      
+      	system("pause");
+      	return 0;
+      }
+Output: 前三行都是10， 后三行都是乱码
+// 而我们test2()中， 返回了静态变量的地址， 是一种正确的写法
+Demo:
+  #include <iostream>
+  using namespace std;
+  
+  int& test2()
+  {
+  	static int a = 20;
+  	return a; // 静态变量
+  }
+  
+  int main()
+  {
+  
+  	int& ref3 = test2();
+  
+  	cout << "ref3 = " << ref3 << endl;
+  	cout << "ref3 = " << ref3 << endl;
+  	cout << "ref3 = " << ref3 << endl;
+  
+  	test2() = 5211314;
+  
+  	cout << "ref3 = " << ref3 << endl;
+  	cout << "ref3 = " << ref3 << endl;
+  	cout << "ref3 = " << ref3 << endl;
+  
+  	system("pause");
+  	return 0;
+  }
+//OUTPUT: 
+  ref3 = 20
+  ref3 = 20
+  ref3 = 20
+  ref3 = 5211314
+  ref3 = 5211314
+  ref3 = 5211314
+// 看弹幕给出的一种理解方法： 函数本身就是一个别名！！ test2()本身就是一个别名！！！
+// 也就是说 test2(), ref3, a 三者是等价的！！
+
+
+Question? 引用的本质是什么？
+Ans: 引用的本质在c++中的内部实现就是一个指针常量
+    int& ref = a;
+    // 相当于 int* const ref = &a;
+    以后， 我们再用到ref 时， 系统会自动帮我们转化成* ref
+
+常量引用：用  const 修饰形参， 防止形参改变实参
+    void showValue( int& a)
+    {
+    	a++;
+    	cout << a << endl;
+    }
+    int main()
+    {
+    	//  showValue(20);
+      //  上面一行显然是有问题的， 我们不希望常量的值被修改
+    	system("pause");
+    	return 0;
+    }
+    不妨重写函数为 showValue (consty int& a);
+
+
+函数:           ***一些C++的traits***
+1. 默认值:
+    1.默认值只能放到函数声明的最后面
+    2.函数声明时已经有了默认参数的话， 函数实现就不要再写默认参数了
+      <术语： 不要重定义默认参数>
+2. 占位参数：
+     不知道有什么用？
+      听说以后的课程会用到这个技术
+3. 函数的重载 Overload!!
+    <1>.引用作为重载条件
+          Demo:
+            #include <iostream>
+            using namespace std;
+            
+            void func(int& a)
+            {
+            	cout << "调用func(int& a)" << endl;
+            }
+            
+            void func(const int& a)
+            {
+            	cout << "调用func(const int& a)" << endl;
+            }
+            
+            int main()
+            {
+            	int a;
+            	func(a);
+            	system("pause");
+            	return 0;
+            }
+          // 从输出结果来看， 程序调用了上面的函数， 而没有调用下面的函数
+          // 感觉我差不多学会盲打了（hwh!!）
+
+
+
+    <2>.函数重载碰到默认参数
+        func(int a);
+        func(int a , int b = 10);
+        // 在这些情况下， 程序会出现二义性
+        // 结论： 如果我们想要函数重载， 那就不要写默认参数了
