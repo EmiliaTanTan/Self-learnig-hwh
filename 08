@@ -1,0 +1,50 @@
+Finaly!! Object-Oriented Programming!!!
+封装 继承 多态
+
+Demo:
+      #include <iostream>
+      using namespace std;
+      const double PI = 3.14;
+      // 求⚪的周长
+      // 2 * 3。14 * r
+      class Circle {
+      	// 访问权限
+      	// 公共权限
+      public:
+      	// 属性
+      	int r;
+      	// 行为
+      	// 获取圆的周长
+      	double circumference()
+      	{
+      		return 2 * PI * r;
+      	}
+      
+      };
+      int main()
+      {
+      	// 通过⚪类创建一个具体的⚪
+      	Circle cl;
+      	cl.r = 10;
+      	cout << "圆的周长为  ：" << cl.circumference() << endl;
+      	system("pause");
+      	return 0;
+      }
+我们把类中的属性和方法， 统一称为行为
+
+访问权限
+    public 类内，外可以访问到成员
+    protected
+    private
+// 后面两个都是类内可以访问， 类外不可以访问
+
+// 当我们继承的时候， 父亲的保护权限， 可以由儿子访问
+// 父类的私有权限， 儿子不可以访问
+
+在  C++ 中， struct 和 class 唯一的区别在于：
+     struct 的默认权限是公共， class 的默认权限是私有
+
+感觉面向对象还是很简单的！
+一种常用的解决访问私有成员的方法：
+    利用我们自己提供的接口！！！ 我们做什么事， 只能够从public中公开的接口去访问！！
+
